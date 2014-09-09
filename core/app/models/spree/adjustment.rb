@@ -46,6 +46,7 @@ module Spree
     scope :tax, -> { where(source_type: 'Spree::TaxRate') }
     scope :price, -> { where(adjustable_type: 'Spree::LineItem') }
     scope :shipping, -> { where(adjustable_type: 'Spree::Shipment') }
+    scope :handling, -> { where(source_type: 'Spree::StockLocation') }
     scope :optional, -> { where(mandatory: false) }
     scope :eligible, -> { where(eligible: true) }
     scope :charge, -> { where("#{quoted_table_name}.amount >= 0") }

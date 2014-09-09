@@ -12,6 +12,14 @@ module Spree
     scope :active, -> { where(active: true) }
 
     after_create :create_stock_items, :if => "self.propagate_all_variants?"
+    
+    include Spree::Core::CalculatedAdjustments
+    include Spree::Core::AdjustmentSource
+    has_many :adjustments, as: :source
+    
+    def compute_amount(item)
+      calculator.compute(item)
+    end    
 
     def state_text
       state.try(:abbr) || state.try(:name) || state_name

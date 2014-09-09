@@ -16,6 +16,10 @@ module Spree
         compute_from_quantity(package.contents.sum(&:quantity))
       end
 
+      def compute_shipment(shipment)
+        compute_from_quantity(shipment.manifest.sum(&:quantity))
+      end
+
       def compute_from_quantity(quantity)
         sum = 0
         max = self.preferred_max_items.to_i
@@ -28,7 +32,7 @@ module Spree
           end
         end
 
-        sum
+        return sum
       end
     end
   end

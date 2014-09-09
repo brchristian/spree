@@ -16,6 +16,10 @@ module Spree
         compute_from_price(total(package.contents))
       end
 
+      def compute_shipment(shipment)
+        compute_from_price(total(shipment.manifest))
+      end
+
       def compute_from_price(price)
         if price < self.preferred_minimal_amount
           self.preferred_normal_amount

@@ -14,6 +14,10 @@ module Spree
         compute_from_quantity(package.contents.sum(&:quantity))
       end
 
+      def compute_shipment(shipment)
+        compute_from_quantity(shipment.manifest.sum(&:quantity))
+      end
+
       def compute_from_quantity(quantity)
         self.preferred_amount * quantity
       end

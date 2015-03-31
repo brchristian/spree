@@ -5,8 +5,8 @@ class FixAdjustmentOrderPresence < ActiveRecord::Migration
       adjustable = adjustment.adjustable
       if adjustable.is_a? Spree::Order
         adjustment.update_attributes!(order_id: adjustable.id)
-      else
-        adjustment.update_attributes!(adjustable: adjustable.order)
+      elsif adjustable.try(:order_id).present?
+        adjustment.update_attributes!(order_id: adjustable.order_id)
       end
     end
   end
